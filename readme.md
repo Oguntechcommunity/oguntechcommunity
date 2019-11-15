@@ -14,3 +14,4 @@ Format app with `npm run format`
 
 ## Developers
 - abbey web[https://twitter.com/abbey_web]
+- Adedamola Adeniyi 

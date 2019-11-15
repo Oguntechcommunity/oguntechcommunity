@@ -8,7 +8,7 @@ describe("Pages", () => {
 			const wrap = mount(<Index />);
 			expect(wrap).toMatchSnapshot();
 		});
-		
+
 		it("should render without throwing an error", () => {
 			const wrap = mount(<Index />);
 			expect(wrap.find("h1").text()).toBe("Welcome to Next.js!");

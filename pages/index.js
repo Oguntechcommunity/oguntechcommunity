@@ -1,68 +1,226 @@
 import React from "react";
-import Head from "next/head";
-import Nav from "./components/Nav";
-import Home from "./components/Home";
+
+import Hero from "./components/hero/hero-component";
+import CardList from "./components/card-list/card-list.component";
+import Layout from "./components/layout/layout.component";
 
 const Index = () => (
-	<div>
-		<Head>
-			<title>Home</title>
-			<link rel="icon" href="/favicon.ico" />
-		</Head>
+	<Layout>
+		<Hero />
+		<section className="cards">
+			<div className="section-title">
+				<div className="container">
+					<div className="row">
+						<div className="col">
+							<div className="cards-content">
+								<div className="card-bh-container">
+									<div className="cards-bh-under"></div>
+									<div className="cards-bh">
+										<h2 className="text-center">Why Join us?</h2>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="section-card">
+				<div className="container">
+					<div className="row">
+						<div className="col">
+							<CardList />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-		<Nav />
-
-		<div className="hero">
-			<Home />
-		</div>
-
-		<style jsx="true">{`
-			.hero {
-				width: 100%;
-				color: #333;
-			}
-			.title {
-				margin: 0;
-				width: 100%;
-				padding-top: 80px;
-				line-height: 1.15;
-				font-size: 48px;
-			}
-			.title,
-			.description {
-				text-align: center;
-			}
-			.row {
-				max-width: 880px;
-				margin: 80px auto 40px;
-				display: flex;
-				flex-direction: row;
-				justify-content: space-around;
-			}
-			.card {
-				padding: 18px 18px 24px;
-				width: 220px;
-				text-align: left;
-				text-decoration: none;
-				color: #434343;
-				border: 1px solid #9b9b9b;
-			}
-			.card:hover {
-				border-color: #067df7;
-			}
-			.card h3 {
-				margin: 0;
-				color: #067df7;
-				font-size: 18px;
-			}
-			.card p {
-				margin: 0;
-				padding: 12px 0 0;
-				font-size: 13px;
-				color: #333;
-			}
-		`}</style>
-	</div>
+		<section className="community">
+			<div className="section-title">
+				<div className="container">
+					<div className="row">
+						<div className="col">
+							<div className="cards-content">
+								<div className="card-bh-container">
+									<div className="cards-bh-under"></div>
+									<div className="cards-bh">
+										<h2 className="text-center">Community Overview</h2>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="section-community">
+				<div className="container">
+					<div className="row">
+						<div className="col-md-3 offset-lg-1">
+							<div
+								className="nav flex-column nav-pills"
+								id="v-pills-tab"
+								role="tablist"
+								aria-orientation="vertical"
+							>
+								<a
+									className="nav-link active"
+									id="v-pills-se-tab"
+									data-toggle="pill"
+									href="#v-pills-se"
+									role="tab"
+									aria-controls="v-pills-se"
+									aria-selected="true"
+								>
+									Software Engineering
+								</a>
+								<a
+									className="nav-link"
+									id="v-pills-design-tab"
+									data-toggle="pill"
+									href="#v-pills-design"
+									role="tab"
+									aria-controls="v-pills-design"
+									aria-selected="false"
+								>
+									Design
+								</a>
+								<a
+									className="nav-link"
+									id="v-pills-dm-tab"
+									data-toggle="pill"
+									href="#v-pills-dm"
+									role="tab"
+									aria-controls="v-pills-dm"
+									aria-selected="false"
+								>
+									Digital Marketing
+								</a>
+								<a
+									className="nav-link"
+									id="v-pills-cw-tab"
+									data-toggle="pill"
+									href="#v-pills-cw"
+									role="tab"
+									aria-controls="v-pills-settings-cw"
+									aria-selected="false"
+								>
+									Content Writing
+								</a>
+							</div>
+						</div>
+						<div className="col-md-7 offset-lg-1">
+							<div className="tab-content" id="v-pills-tabContent">
+								<div
+									className="tab-pane fade show active"
+									id="v-pills-se"
+									role="tabpanel"
+									aria-labelledby="v-pills-se-tab"
+								>
+									<div className="video-container">
+										<div className="video-bg"></div>
+										<div className="video">
+											<iframe
+												width="560"
+												height="315"
+												src="https://www.youtube.com/embed/IzJzUruMpeE"
+												frameBorder="0"
+												allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+												allowFullScreen
+											></iframe>
+										</div>
+										<div className="video-info">
+											<h3 className="video-title">
+												Introduction to Software Engineering
+											</h3>
+											<p className="video-description">Google</p>
+										</div>
+									</div>
+								</div>
+								<div
+									className="tab-pane fade"
+									id="v-pills-design"
+									role="tabpanel"
+									aria-labelledby="v-pills-design-tab"
+								>
+									<div className="video-container">
+										<div className="video-bg"></div>
+										<div className="video">
+											<iframe
+												width="560"
+												height="315"
+												src="https://www.youtube.com/embed/IzJzUruMpeE"
+												frameBorder="0"
+												allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+												allowFullScreen
+											></iframe>
+										</div>
+										<div className="video-info">
+											<h3 className="video-title">
+												Introduction to Software Engineering
+											</h3>
+											<p className="video-description">Google</p>
+										</div>
+									</div>
+								</div>
+								<div
+									className="tab-pane fade"
+									id="v-pills-dm"
+									role="tabpanel"
+									aria-labelledby="v-pills-dm-tab"
+								>
+									<div className="video-container">
+										<div className="video-bg"></div>
+										<div className="video">
+											<iframe
+												width="560"
+												height="315"
+												src="https://www.youtube.com/embed/IzJzUruMpeE"
+												frameBorder="0"
+												allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+												allowFullScreen
+											></iframe>
+										</div>
+										<div className="video-info">
+											<h3 className="video-title">
+												Introduction to Software Engineering
+											</h3>
+											<p className="video-description">Google</p>
+										</div>
+									</div>
+								</div>
+								<div
+									className="tab-pane fade"
+									id="v-pills-cw"
+									role="tabpanel"
+									aria-labelledby="v-pills-cw-tab"
+								>
+									<div className="video-container">
+										<div className="video-bg"></div>
+										<div className="video">
+											<iframe
+												width="560"
+												height="315"
+												src="https://www.youtube.com/embed/IzJzUruMpeE"
+												frameBorder="0"
+												allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+												allowFullScreen
+											></iframe>
+										</div>
+										<div className="video-info">
+											<h3 className="video-title">
+												Introduction to Software Engineering
+											</h3>
+											<p className="video-description">Google</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</Layout>
 );
 
 export default Index;

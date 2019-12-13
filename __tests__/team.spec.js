@@ -1,11 +1,11 @@
 import * as React from "react";
 import { mount } from "enzyme";
-import Index from "../pages/index.js";
+import Team from "../pages/team.js";
 
 describe("Pages", () => {
-	describe("Index", () => {
+	describe("Team", () => {
 		it("should match snapshot", () => {
-			const wrap = mount(<Index />);
+			const wrap = mount(<Team />);
 			expect(wrap).toMatchSnapshot();
 		});
 

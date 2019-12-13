@@ -5,7 +5,24 @@ import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 import bgImage from "../../../public/images/bg-image.svg";
-import Cloud from "../../../public/images/cloud.png";
+import cloud from "../../../public/images/cloud.png";
+
+const emailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+const formValid = ( formErrors, ...rest) => {
+	let valid = true;
+
+	// Validate form errors when empty
+	Object.values(formErrors).forEach(val => {
+		val.length > 0 && (valid = false)
+	});
+
+	Object.values(rest).forEach(val => {
+		val == null && (valid = false);
+	});
+
+	return valid;
+};
 
 class Hero extends React.Component {
 	constructor(props) {
@@ -15,21 +32,70 @@ class Hero extends React.Component {
 			name: "",
 			portfolio: "",
 			job: "",
-			email: ""
+			email: "",
+			formErrors: {
+				name: "",
+				portfolio: "",
+				job: "",
+				email: ""
+
+			}
 		};
 	}
 
+
 	handleSubmit = event => {
 		event.preventDefault();
+
+		if(formValid(this.state.formErrors)){
+
+			//Submission condition goes here
+
+		} else {
+			// console.error("FORM INVALID - DISPLAY ERROR MESSAGE")
+		}
 	};
 
 	handleChange = event => {
+		event.preventDefault();
 		const { value, name } = event.target;
 
-		this.setState({ [name]: value });
+		let formErrors = this.state.formErrors;
+
+		switch(name) {
+			case "name":
+				formErrors.name =
+					value.length < 3
+						? " minimum of 3 characters required"
+						: "";
+				break;
+			case "portfolio":
+				formErrors.portfolio =
+					value.length < 3
+						? "Portfolio link or Github link is required"
+						: "";
+				break;
+			case "job":
+				formErrors.job =
+					value.length < 2
+						? "Put a valid job title"
+						: "";
+				break;
+			case "email":
+				formErrors.email =
+					emailRegex.test(value)
+						? ""
+						: "Invalid email address";
+				break;
+			default:
+				break;
+		}
+		this.setState({ formErrors, [name]: value }, ()=> console.log(this.state));
+
 	};
 
 	render() {
+		const { formErrors, name, portfolio, job, email } = this.state;
 		return (
 			<section className="header">
 				<div className="container">
@@ -41,7 +107,7 @@ class Hero extends React.Component {
 								</h2>
 								<p className="rc-paragraph">
 									Ogun Tech Community is a circle of technology enthusiasts
-									passionate about solving problems in thier immedaite
+									passionate about solving problems in their immedaite
 									workplace.
 								</p>
 								<button
@@ -86,52 +152,64 @@ class Hero extends React.Component {
 												Please fill out all fields and upload your profile photo
 												so that we know you’ve got what it takes.
 											</p>
+										<form onSubmit={this.handleSubmit}>
 											<div className="content">
 												<div className="col-md-6 p-0 order-1">
-													<form onSubmit={this.handleSubmit}>
+
 														<label htmlFor="email">Name</label>
 														<FormInput
 															name="name"
-															value={this.state.name}
+															value={name}
 															handleChange={this.handleChange}
 															type="text"
 															className="form-control"
 															placeholder="John Doe"
 														/>
+														{ formErrors.name.length > 0 && (
+															<span className="text-danger">{formErrors.name}</span>
+														)}<br/>
 														<label htmlFor="email">Portfolio</label>
 														<FormInput
 															name="portfolio"
-															value={this.state.portfolio}
+															value={portfolio}
 															handleChange={this.handleChange}
 															type="url"
 															className="form-control"
 															placeholder="https://"
 														/>
+														{ formErrors.portfolio.length > 0 && (
+															<span className="text-danger">{formErrors.portfolio}</span>
+														)}<br/>
 														<label htmlFor="email">Job Title</label>
 														<FormInput
 															name="job"
 															type="text"
-															value={this.state.job}
+															value={job}
 															handleChange={this.handleChange}
 															className="form-control"
 															placeholder="UI Designer"
 														/>
+														{ formErrors.job.length > 0 && (
+															<span className="text-danger">{ formErrors.job}</span>
+														)}<br/>
 														<label htmlFor="email">Email</label>
 														<FormInput
 															name="email"
 															type="email"
-															value={this.state.email}
+															value={email}
 															handleChange={this.handleChange}
 															className="form-control"
 															placeholder="john@mail.com"
 														/>
+														{ formErrors.email.length > 0 && (
+															<span className="text-danger">{ formErrors.email}</span>
+														)}<br/>
 														<CustomButton
 															type="submit"
 															className="btn custom-button"
 														>
 															Request Invite
 														</CustomButton>
-													</form>
 												</div>
 												<div className="col-md-6 p-0 order-2">
 													<div className="dropzone-area">
@@ -141,7 +219,7 @@ class Hero extends React.Component {
 																	<div className="outline">
 																		<div className="outline-content">
 																			<input {...getInputProps()} />
-																			<img src={Cloud} alt="Cloud Icon" />
+																			<img src={cloud} alt="Cloud Icon" />
 																			<br />
 																			Drag and drop here <br />
 																			or
@@ -154,6 +232,8 @@ class Hero extends React.Component {
 													</div>
 												</div>
 											</div>
+											
+										</form>
 										</div>
 									</div>
 								</div>

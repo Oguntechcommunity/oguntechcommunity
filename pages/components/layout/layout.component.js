@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import Nav from "../navbar/navBar.component";
+import NavBar from "../navbar/navBar.component";
 import Newsletter from "../newsletter/newsletter.component";
 import Footer from "../footer/footer.component";
 import "../../../public/scss/style.scss";
@@ -32,7 +32,7 @@ const Layout = props => (
 				crossOrigin="anonymous"
 			></script>
 		</Head>
-		<Nav />
+		<NavBar />
 		{props.children}
 		<Newsletter />
 		<Footer />

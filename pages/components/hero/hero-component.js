@@ -1,5 +1,6 @@
 import React from "react";
 import Dropzone from "react-dropzone";
+import Zoom from 'react-reveal/Zoom';
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -7,14 +8,16 @@ import CustomButton from "../custom-button/custom-button.component";
 import bgImage from "../../../public/images/bg-image.svg";
 import cloud from "../../../public/images/cloud.png";
 
-const emailRegex = RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+const emailRegex = RegExp(
+	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+);
 
-const formValid = ( formErrors, ...rest) => {
+const formValid = (formErrors, ...rest) => {
 	let valid = true;
 
 	// Validate form errors when empty
 	Object.values(formErrors).forEach(val => {
-		val.length > 0 && (valid = false)
+		val.length > 0 && (valid = false);
 	});
 
 	Object.values(rest).forEach(val => {
@@ -38,19 +41,15 @@ class Hero extends React.Component {
 				portfolio: "",
 				job: "",
 				email: ""
-
 			}
 		};
 	}
 
-
 	handleSubmit = event => {
 		event.preventDefault();
 
-		if(formValid(this.state.formErrors)){
-
+		if (formValid(this.state.formErrors)) {
 			//Submission condition goes here
-
 		} else {
 			// console.error("FORM INVALID - DISPLAY ERROR MESSAGE")
 		}
@@ -62,36 +61,27 @@ class Hero extends React.Component {
 
 		let formErrors = this.state.formErrors;
 
-		switch(name) {
+		switch (name) {
 			case "name":
 				formErrors.name =
-					value.length < 3
-						? " minimum of 3 characters required"
-						: "";
+					value.length < 3 ? " minimum of 3 characters required" : "";
 				break;
 			case "portfolio":
 				formErrors.portfolio =
-					value.length < 3
-						? "Portfolio link or Github link is required"
-						: "";
+					value.length < 3 ? "Portfolio link or Github link is required" : "";
 				break;
 			case "job":
-				formErrors.job =
-					value.length < 2
-						? "Put a valid job title"
-						: "";
+				formErrors.job = value.length < 2 ? "Put a valid job title" : "";
 				break;
 			case "email":
-				formErrors.email =
-					emailRegex.test(value)
-						? ""
-						: "Invalid email address";
+				formErrors.email = emailRegex.test(value)
+					? ""
+					: "Invalid email address";
 				break;
 			default:
 				break;
 		}
-		this.setState({ formErrors, [name]: value }, ()=> console.log(this.state));
-
+		this.setState({ formErrors, [name]: value });
 	};
 
 	render() {
@@ -101,24 +91,27 @@ class Hero extends React.Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-md-6">
-							<div className="rc">
-								<h2 className="rc-heading">
-									Connecting the tech professionals in Ogun state
-								</h2>
-								<p className="rc-paragraph">
-									Ogun Tech Community is a circle of technology enthusiasts
-									passionate about solving problems in their immedaite
-									workplace.
-								</p>
-								<button
-									type="button"
-									className="rc-button btn"
-									data-toggle="modal"
-									data-target="#exampleModal"
-								>
-									Request Invite
-								</button>
-							</div>
+							<Zoom>
+								<div className="rc">
+									<h2 className="rc-heading">
+										Connecting the tech professionals in Ogun state
+									</h2>
+									<p className="rc-paragraph">
+										Ogun Tech Community is a circle of technology enthusiasts
+										passionate about solving problems in their immedaite
+										workplace.
+									</p>
+									<button
+										type="button"
+										className="rc-button btn"
+										data-toggle="modal"
+										data-target="#exampleModal"
+									>
+										Request Invite
+									</button>
+								</div>
+
+							</Zoom>
 
 							<div
 								className="modal fade"
@@ -152,98 +145,110 @@ class Hero extends React.Component {
 												Please fill out all fields and upload your profile photo
 												so that we know you’ve got what it takes.
 											</p>
-										<form onSubmit={this.handleSubmit}>
-											<div className="content">
-												<div className="col-md-6 p-0 order-1">
-
+											<form onSubmit={this.handleSubmit}>
+												<div className="content">
+													<div className="col-md-6 p-0 order-1">
 														<label htmlFor="email">Name</label>
 														<FormInput
 															name="name"
 															value={name}
-															handleChange={this.handleChange}
+															onChange={this.handleChange}
 															type="text"
 															className="form-control"
 															placeholder="John Doe"
 														/>
-														{ formErrors.name.length > 0 && (
-															<span className="text-danger">{formErrors.name}</span>
-														)}<br/>
+														{formErrors.name.length > 0 && (
+															<span className="text-danger">
+																{formErrors.name}
+															</span>
+														)}
+														<br />
 														<label htmlFor="email">Portfolio</label>
 														<FormInput
 															name="portfolio"
 															value={portfolio}
-															handleChange={this.handleChange}
+															onChange={this.handleChange}
 															type="url"
 															className="form-control"
 															placeholder="https://"
 														/>
-														{ formErrors.portfolio.length > 0 && (
-															<span className="text-danger">{formErrors.portfolio}</span>
-														)}<br/>
+														{formErrors.portfolio.length > 0 && (
+															<span className="text-danger">
+																{formErrors.portfolio}
+															</span>
+														)}
+														<br />
 														<label htmlFor="email">Job Title</label>
 														<FormInput
 															name="job"
 															type="text"
 															value={job}
-															handleChange={this.handleChange}
+															onChange={this.handleChange}
 															className="form-control"
 															placeholder="UI Designer"
 														/>
-														{ formErrors.job.length > 0 && (
-															<span className="text-danger">{ formErrors.job}</span>
-														)}<br/>
+														{formErrors.job.length > 0 && (
+															<span className="text-danger">
+																{formErrors.job}
+															</span>
+														)}
+														<br />
 														<label htmlFor="email">Email</label>
 														<FormInput
 															name="email"
 															type="email"
 															value={email}
-															handleChange={this.handleChange}
+															onChange={this.handleChange}
 															className="form-control"
 															placeholder="john@mail.com"
 														/>
-														{ formErrors.email.length > 0 && (
-															<span className="text-danger">{ formErrors.email}</span>
-														)}<br/>
+														{formErrors.email.length > 0 && (
+															<span className="text-danger">
+																{formErrors.email}
+															</span>
+														)}
+														<br />
 														<CustomButton
 															type="submit"
 															className="btn custom-button"
 														>
 															Request Invite
 														</CustomButton>
-												</div>
-												<div className="col-md-6 p-0 order-2">
-													<div className="dropzone-area">
-														<Dropzone>
-															{({ getRootProps, getInputProps }) => (
-																<div {...getRootProps()}>
-																	<div className="outline">
-																		<div className="outline-content">
-																			<input {...getInputProps()} />
-																			<img src={cloud} alt="Cloud Icon" />
-																			<br />
-																			Drag and drop here <br />
-																			or
-																			<br /> <span>browse</span>
+													</div>
+													<div className="col-md-6 p-0 order-2">
+														<div className="dropzone-area">
+															<Dropzone>
+																{({ getRootProps, getInputProps }) => (
+																	<div {...getRootProps()}>
+																		<div className="outline">
+																			<div className="outline-content">
+																				<input {...getInputProps()} />
+																				<img src={cloud} alt="Cloud Icon" />
+																				<br />
+																				Drag and drop here <br />
+																				or
+																				<br /> <span>browse</span>
+																			</div>
 																		</div>
 																	</div>
-																</div>
-															)}
-														</Dropzone>
+																)}
+															</Dropzone>
+														</div>
 													</div>
 												</div>
-											</div>
-											
-										</form>
+											</form>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div className="col-md-6">
-							<div className="lc">
-								<img src={bgImage} className="lc-bg-image" alt="image" />
-								<div className="lc-image-container"></div>
-							</div>
+							<Zoom>
+								<div className="lc">
+									<img src={bgImage} className="lc-bg-image" alt="image" />
+									<div className="lc-image-container"></div>
+								</div>
+							</Zoom>
 						</div>
 					</div>
 				</div>

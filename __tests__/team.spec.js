@@ -8,6 +8,5 @@ describe("Pages", () => {
 			const wrap = mount(<Team />);
 			expect(wrap).toMatchSnapshot();
 		});
-
 	});
 });

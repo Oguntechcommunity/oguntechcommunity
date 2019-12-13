@@ -8,6 +8,5 @@ describe("Pages", () => {
 			const wrap = mount(<Index />);
 			expect(wrap).toMatchSnapshot();
 		});
-
 	});
 });

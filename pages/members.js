@@ -1,5 +1,5 @@
 import React from "react";
-import Zoom from 'react-reveal/Zoom';
+import Zoom from "react-reveal/Zoom";
 
 import MemberComponent from "./components/members/members.component";
 import Layout from "./components/layout/layout.component";

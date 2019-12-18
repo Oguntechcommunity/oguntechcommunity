@@ -1,5 +1,5 @@
 import React from "react";
-import Zoom from 'react-reveal/Zoom';
+import Zoom from "react-reveal/Zoom";
 
 import Hero from "./components/hero/hero-component";
 import CardList from "./components/card-list/card-list.component";

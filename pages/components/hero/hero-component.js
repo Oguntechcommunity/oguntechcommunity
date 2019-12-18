@@ -1,6 +1,6 @@
 import React from "react";
 import Dropzone from "react-dropzone";
-import Zoom from 'react-reveal/Zoom';
+import Zoom from "react-reveal/Zoom";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
@@ -27,6 +27,16 @@ const formValid = (formErrors, ...rest) => {
 	return valid;
 };
 
+const enhanceWithPreview = files =>
+  files.map(file =>
+    Object.assign({}, file, {
+      preview: URL.createObjectURL(file),
+    })
+  )
+
+const withPreviews = dropHandler => (accepted, rejected) =>
+dropHandler(enhanceWithPreview(accepted), rejected)
+
 class Hero extends React.Component {
 	constructor(props) {
 		super(props);
@@ -36,6 +46,7 @@ class Hero extends React.Component {
 			portfolio: "",
 			job: "",
 			email: "",
+			files: [],
 			formErrors: {
 				name: "",
 				portfolio: "",
@@ -44,6 +55,10 @@ class Hero extends React.Component {
 			}
 		};
 	}
+
+	handleDrop = (accepted, rejected) =>
+    this.setState(state => ({ files: [...state.files, ...accepted] }));
+
 
 	handleSubmit = event => {
 		event.preventDefault();
@@ -110,7 +125,6 @@ class Hero extends React.Component {
 										Request Invite
 									</button>
 								</div>
-
 							</Zoom>
 
 							<div
@@ -217,7 +231,7 @@ class Hero extends React.Component {
 													</div>
 													<div className="col-md-6 p-0 order-2">
 														<div className="dropzone-area">
-															<Dropzone>
+															<Dropzone onDrop={withPreviews(this.handleDrop)} >
 																{({ getRootProps, getInputProps }) => (
 																	<div {...getRootProps()}>
 																		<div className="outline">
@@ -233,6 +247,16 @@ class Hero extends React.Component {
 																	</div>
 																)}
 															</Dropzone>
+															<div className="image-preview">
+																{this.state.files.map(file => (
+																	<img
+																	key={file.name}
+																	src={file.preview}
+																	alt=""
+																	className="dropped-image"
+																	/>
+																))}
+															</div>
 														</div>
 													</div>
 												</div>

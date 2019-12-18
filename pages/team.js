@@ -1,5 +1,5 @@
 import React from "react";
-import Zoom from 'react-reveal/Zoom';
+import Zoom from "react-reveal/Zoom";
 
 import PortfolioCardList from "./components/portfolio-card-list/portfolio-card-list.component";
 import Layout from "./components/layout/layout.component";

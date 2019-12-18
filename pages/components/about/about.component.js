@@ -1,5 +1,5 @@
 import React from "react";
-import Zoom from 'react-reveal/Zoom';
+import Zoom from "react-reveal/Zoom";
 
 import Devfest from "../../../public/images/devfest.jpg";
 
@@ -22,8 +22,8 @@ const AboutComponent = () => (
 
 					<Zoom>
 						<p>
-							A 'tech hub' is a physical space – a city, a suburb or just a suite
-							of offices – which has developed to help technology startup
+							A 'tech hub' is a physical space – a city, a suburb or just a
+							suite of offices – which has developed to help technology startup
 							companies succeed and, they hope, become the next tech titan like
 							Facebook or Microsoft.
 						</p>
@@ -31,10 +31,10 @@ const AboutComponent = () => (
 					<Zoom>
 						<p>
 							Ogun State is a state in southwestern Nigeria. Created in 1976, it
-							borders Lagos State to the south, Oyo and Osun states to the north,
-							Ondo to the east and the Republic of Benin to the west. Abeokuta is
-							the capital and largest city in the state. The state's appellation
-							is "Gateway to Nigeria".
+							borders Lagos State to the south, Oyo and Osun states to the
+							north, Ondo to the east and the Republic of Benin to the west.
+							Abeokuta is the capital and largest city in the state. The state's
+							appellation is "Gateway to Nigeria".
 						</p>
 					</Zoom>
 					<div className="about-image">

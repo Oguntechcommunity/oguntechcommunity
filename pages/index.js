@@ -142,7 +142,7 @@ const Index = () => (
 												<h3 className="video-title">
 													Introduction to Software Engineering
 												</h3>
-												<p className="video-description">Google</p>
+												<p className="video-description">Youtube</p>
 											</div>
 										</div>
 									</div>
@@ -158,7 +158,7 @@ const Index = () => (
 												<iframe
 													width="560"
 													height="315"
-													src="https://www.youtube.com/embed/IzJzUruMpeE"
+													src="https://www.youtube.com/embed/wpmHZspl4EM"
 													frameBorder="0"
 													allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 													allowFullScreen
@@ -166,9 +166,9 @@ const Index = () => (
 											</div>
 											<div className="video-info">
 												<h3 className="video-title">
-													Introduction to Software Engineering
+													Introduction to UI/UX
 												</h3>
-												<p className="video-description">Google</p>
+												<p className="video-description">Youtube</p>
 											</div>
 										</div>
 									</div>
@@ -184,7 +184,7 @@ const Index = () => (
 												<iframe
 													width="560"
 													height="315"
-													src="https://www.youtube.com/embed/IzJzUruMpeE"
+													src="https://www.youtube.com/embed/ZVuHLPl69mM"
 													frameBorder="0"
 													allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 													allowFullScreen
@@ -192,9 +192,9 @@ const Index = () => (
 											</div>
 											<div className="video-info">
 												<h3 className="video-title">
-													Introduction to Software Engineering
+													Introduction to Digital Marketing
 												</h3>
-												<p className="video-description">Google</p>
+												<p className="video-description">Youtube</p>
 											</div>
 										</div>
 									</div>
@@ -210,7 +210,7 @@ const Index = () => (
 												<iframe
 													width="560"
 													height="315"
-													src="https://www.youtube.com/embed/IzJzUruMpeE"
+													src="https://www.youtube.com/embed/eXaGdBf70_I"
 													frameBorder="0"
 													allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 													allowFullScreen
@@ -218,9 +218,9 @@ const Index = () => (
 											</div>
 											<div className="video-info">
 												<h3 className="video-title">
-													Introduction to Software Engineering
+													Introduction to Content Writing
 												</h3>
-												<p className="video-description">Google</p>
+												<p className="video-description">Youtube</p>
 											</div>
 										</div>
 									</div>

@@ -1,7 +1,6 @@
 import React from "react";
 import Zoom from "react-reveal/Zoom";
 
-import Devfest from "../../../public/images/devfest.jpg";
 
 const AboutComponent = () => (
 	<section className="about">
@@ -38,7 +37,7 @@ const AboutComponent = () => (
 						</p>
 					</Zoom>
 					<div className="about-image">
-						<img src={Devfest} className="img-top" alt="Image" />
+						<img src="https://res.cloudinary.com/trapintrovert/image/upload/v1576764021/devfest.jpg" className="img-top" alt="Image" />
 					</div>
 					<Zoom>
 						<h1>

@@ -28,14 +28,14 @@ const formValid = (formErrors, ...rest) => {
 };
 
 const enhanceWithPreview = files =>
-  files.map(file =>
-    Object.assign({}, file, {
-      preview: URL.createObjectURL(file),
-    })
-  )
+	files.map(file =>
+		Object.assign({}, file, {
+			preview: URL.createObjectURL(file)
+		})
+	);
 
 const withPreviews = dropHandler => (accepted, rejected) =>
-dropHandler(enhanceWithPreview(accepted), rejected)
+	dropHandler(enhanceWithPreview(accepted), rejected);
 
 class Hero extends React.Component {
 	constructor(props) {
@@ -57,8 +57,7 @@ class Hero extends React.Component {
 	}
 
 	handleDrop = (accepted, rejected) =>
-    this.setState(state => ({ files: [...state.files, ...accepted] }));
-
+		this.setState(state => ({ files: [...state.files, ...accepted] }));
 
 	handleSubmit = event => {
 		event.preventDefault();
@@ -113,7 +112,7 @@ class Hero extends React.Component {
 									</h2>
 									<p className="rc-paragraph">
 										Ogun Tech Community is a circle of technology enthusiasts
-										passionate about solving problems in their immedaite
+										passionate about solving problems in their immediate
 										workplace.
 									</p>
 									<button
@@ -231,7 +230,7 @@ class Hero extends React.Component {
 													</div>
 													<div className="col-md-6 p-0 order-2">
 														<div className="dropzone-area">
-															<Dropzone onDrop={withPreviews(this.handleDrop)} >
+															<Dropzone onDrop={withPreviews(this.handleDrop)}>
 																{({ getRootProps, getInputProps }) => (
 																	<div {...getRootProps()}>
 																		<div className="outline">
@@ -250,10 +249,10 @@ class Hero extends React.Component {
 															<div className="image-preview">
 																{this.state.files.map(file => (
 																	<img
-																	key={file.name}
-																	src={file.preview}
-																	alt=""
-																	className="dropped-image"
+																		key={file.name}
+																		src={file.preview}
+																		alt=""
+																		className="dropped-image"
 																	/>
 																))}
 															</div>
@@ -270,7 +269,13 @@ class Hero extends React.Component {
 							<Zoom>
 								<div className="lc">
 									<img src={bgImage} className="lc-bg-image" alt="image" />
-									<div className="lc-image-container"></div>
+									<div className="lc-image-container">
+										<img
+										 src="https://res.cloudinary.com/trapintrovert/image/upload/v1576764038/community.jpg" 
+										 alt="community illustration" 
+										 className="community-illustration"
+										 />
+									</div>
 								</div>
 							</Zoom>
 						</div>

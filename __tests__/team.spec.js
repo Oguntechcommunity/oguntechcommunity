@@ -1,11 +1,11 @@
 import * as React from "react";
 import { mount } from "enzyme";
-import Nav from "../pages/components/Nav";
+import Team from "../pages/team.js";
 
 describe("Pages", () => {
-	describe("Nav Component", () => {
+	describe("Team", () => {
 		it("should match snapshot", () => {
-			const wrap = mount(<Nav />);
+			const wrap = mount(<Team />);
 			expect(wrap).toMatchSnapshot();
 		});
 	});

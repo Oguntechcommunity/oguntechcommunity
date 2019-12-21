@@ -1,6 +1,22 @@
 @import "variables";
 @import "~bootstrap/scss/bootstrap";
 
+
 .example {
     background-color: var(--gray);
+}
+html, body{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background: #E5E5E5;
+}
+
+section{
+    padding: 2rem 0rem;
 }

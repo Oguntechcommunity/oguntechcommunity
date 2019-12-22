@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "heroku-postbuild": "next build",
+    "start": "next start -p $PORT",
     "build": "next build",
-    "start": "next start",
     "test": "jest --no-cache",
     "test:watch": "jest — watch",
     "test:coverage": "jest — coverage",

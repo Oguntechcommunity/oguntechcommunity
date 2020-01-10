@@ -1,7 +1,7 @@
 import React from "react";
 import Zoom from "react-reveal/Zoom";
 
-import PortfolioCardList from "./components/portfolio-card-list/portfolio-card-list.component";
+import TeamProfileList from "./components/team-list/team-profile-list.component";
 import Layout from "./components/layout/layout.component";
 
 const Team = () => (
@@ -15,7 +15,7 @@ const Team = () => (
 								Ogun Tech Community Team
 							</h2>
 						</Zoom>
-						<PortfolioCardList />
+						<TeamProfileList />
 					</div>
 				</div>
 			</div>

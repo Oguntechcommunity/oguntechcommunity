@@ -2,10 +2,6 @@ import React from "react";
 
 import Card from "../card/card.component";
 
-import resources from "../../../public/images/resources.svg";
-import mentorship from "../../../public/images/mentorship.svg";
-import workshop from "../../../public/images/workshop.svg";
-
 class CardList extends React.Component {
 	constructor() {
 		super();
@@ -15,21 +11,24 @@ class CardList extends React.Component {
 				{
 					id: 1,
 					title: "Access to Resources",
-					image: `${resources}`,
+					image:
+						"https://res.cloudinary.com/trapintrovert/image/upload/v1578574040/resources.svg",
 					description:
 						"Get access to quality resources to progress in your career and also receive regular job updates"
 				},
 				{
 					id: 2,
 					title: "Mentorship Opportunity",
-					image: `${mentorship}`,
+					image:
+						"https://res.cloudinary.com/trapintrovert/image/upload/v1578574040/mentorship.svg",
 					description:
 						"Get access to quality resources to progress in your career and also receive regular job updates"
 				},
 				{
 					id: 3,
 					title: "Free Workshop & Training",
-					image: `${workshop}`,
+					image:
+						"https://res.cloudinary.com/trapintrovert/image/upload/v1578574041/workshop.svg",
 					description:
 						"Get access to quality resources to progress in your career and also receive regular job updates"
 				}

@@ -1,0 +1,4 @@
+export const TeamActionTypes = {
+    FETCH_TEAMS_SUCCESS : 'FETCH_TEAMS_SUCCESS',
+    FETCH_TEAMS_FAILURE: 'FETCH_TEAMS_FAILURE'
+}

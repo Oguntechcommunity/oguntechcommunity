@@ -7,6 +7,7 @@ import { selectCurrentMember } from "../../../redux/member/member.selectors";
 import Portfolio from "../../components/portfolio/portfolio.component";
 
 const PortfolioCardList = ({ members }) => {
+		
 	return (
 		<div className="portfolio-list">
 			{members.map(({ id, ...otherProps }) => (

@@ -1,34 +1,33 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
+import axios from 'axios';
 
 import useForm from "./useForm";
 import validate from "./validate";
-import { withPreviews, clearPreviews } from './withPreview'
 
-
-import Dropzone from "react-dropzone";
 import Zoom from "react-reveal/Zoom";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 import bgImage from "../../../public/images/bg-image.svg";
-import cloud from "../../../public/images/cloud.png";
+
 
 import { registrationSuccess } from "../../../redux/registration/reg.actions";
 
-
 const INITIAL_STATE = {
-		name: "",
-		portfolio: "",
-		image: "",
-		job: "",
-		email: ""
-}
+	full_name: "",
+	job_title: "",
+	portfolio: "",
+	email_address: "",
+	avatar: ""
+};
+
+
+
 
 
 const Hero = ({ registrationSuccess }) => {
-
 	const {
 		handleSubmit,
 		handleChange,
@@ -36,25 +35,179 @@ const Hero = ({ registrationSuccess }) => {
 		values,
 		errors,
 		isSubmitting
-	  } = useForm(INITIAL_STATE, submit, validate); 
-	  const [files, setFiles] = useState([])
-	  const { name, portfolio, image, job, email } = values;
+	} = useForm(INITIAL_STATE, submit, validate);
 
-
-	  useEffect(() => () => clearPreviews(files), [files])
-	
-	  const handleDrop = useCallback(accepted =>
-		setFiles(files => [...files, ...accepted])
-	  )
-
-
+	const { full_name, job_title, portfolio, email_address, avatar } = values;
 
 
 	function submit() {
+		const userObject = {
+			full_name,
+			job_title,
+			portfolio,
+			email_address,
+			avatar
+		}
+		axios({
+			method:'POST',
+			url: `${process.env.REACT_APP_API_URL}/user`,
+			headers: {
+				Authorization: 'Bearer 2d662d4d3b86df2697c87a5a88764627A+CvuYJLmEHSWmE1cG/q3p8b47zf/2jAD8udUUzpQy6ewahZEzE1b0ZQnw9q06is',
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify(userObject)
 
-		registrationSuccess({ name, portfolio, files, image, job, email });
+		})
+		.then((res) => {
+			console.log(res.data)
+			console.log(userObject)
+			registrationSuccess( {userObject})
+		})
+		.catch((err) => {
+			console.log()
+		})
 
+		
 	}
+
+	const modalContent = (
+		full_name, 
+		job_title, 
+		portfolio, 
+		email_address, 
+		avatar, 
+		handleSubmit,
+		handleChange,
+		handleBlur,
+		errors,
+		isSubmitting ) => (
+		<div
+			className="modal fade"
+			id="exampleModal"
+			tabIndex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalLabel"
+			aria-hidden="true"
+		>
+			<div className="modal-dialog" role="document">
+				<div className="modal-content">
+					<div className="modal-header">
+						<h5 className="modal-title" id="exampleModalLabel">
+							Request an invite
+						</h5>
+						<button
+							type="button"
+							className="close"
+							data-dismiss="modal"
+							aria-label="Close"
+						>
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div className="modal-body">
+						<p>
+							Feel free to join the community of tech professionals in
+							Ogun State today!
+						</p>
+						<p>
+							Please fill out all fields and upload your profile photo
+							so that we know you’ve got what it takes.
+						</p>
+						<form onSubmit={handleSubmit} noValidate>
+							<div className="content">
+								<div className="col-md-6 pl-2 order-1">
+									<label htmlFor="name">Name</label>
+									<FormInput
+										name="full_name"
+										value={full_name}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										type="text"
+										className="form-control"
+										placeholder="John Doe"
+									/>
+									{errors.full_name && (
+										<p className="text-danger">{errors.full_name}</p>
+									)}
+									<br />
+									<label htmlFor="portfolio">Portfolio</label>
+									<FormInput
+										name="portfolio"
+										value={portfolio}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										type="url"
+										className="form-control"
+										placeholder="https://"
+										required
+									/>
+									{errors.portfolio && (
+										<p className="text-danger">{errors.portfolio}</p>
+									)}
+									<br />
+
+									<label htmlFor="job">Job Title</label>
+									<FormInput
+										name="job_title"
+										type="text"
+										value={job_title}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										className="form-control"
+										placeholder="UI Designer"
+									/>
+									{errors.job_title && (
+										<p className="text-danger">{errors.job_title}</p>
+									)}
+									
+									<br />
+
+								</div>
+								<div className="col-md-6 pl-2 order-2">
+									<label htmlFor="image">image</label>
+									<FormInput
+										name="avatar"
+										value={avatar}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										type="file"
+										className="form-control"
+										placeholder="image"
+									/>
+									{errors.avatar && (
+										<p className="text-danger">{errors.avatar}</p>
+									)}
+
+									<br />
+									<label htmlFor="email">Email</label>
+									<FormInput
+										name="email_address"
+										type="email"
+										value={email_address}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										className="form-control"
+										placeholder="john@mail.com"
+									/>
+									{errors.email_address && (
+										<p className="text-danger">{errors.email_address}</p>
+									)}	
+								</div>
+								
+							</div>
+							<CustomButton
+							type="submit"
+							className="btn custom-button"
+							disabled={isSubmitting}
+							>
+								Request Invite
+							</CustomButton>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	)
 
 	return (
 		<section className="header">
@@ -81,155 +234,10 @@ const Hero = ({ registrationSuccess }) => {
 								</button>
 							</div>
 						</Zoom>
-
-						<div
-							className="modal fade"
-							id="exampleModal"
-							tabIndex="-1"
-							role="dialog"
-							aria-labelledby="exampleModalLabel"
-							aria-hidden="true"
-						>
-							<div className="modal-dialog" role="document">
-								<div className="modal-content">
-									<div className="modal-header">
-										<h5 className="modal-title" id="exampleModalLabel">
-											Request an invite
-										</h5>
-										<button
-											type="button"
-											className="close"
-											data-dismiss="modal"
-											aria-label="Close"
-										>
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div className="modal-body">
-										<p>
-											Feel free to join the community of tech professionals in
-											Ogun State today!
-										</p>
-										<p>
-											Please fill out all fields and upload your profile photo
-											so that we know you’ve got what it takes.
-										</p>
-										<form onSubmit={handleSubmit} noValidate>
-											<div className="content">
-												<div className="col-md-6 p-0 order-1">
-													<label htmlFor="name">Name</label>
-													<FormInput
-														name="name"
-														value={name}
-														onChange={handleChange}
-														onBlur={handleBlur}
-														type="text"
-														className="form-control"
-														placeholder="John Doe"
-													/>
-													{errors.name && <p className="text-danger">{errors.name}</p>}
-													<br />
-													<label htmlFor="portfolio">Portfolio</label>
-													<FormInput
-														name="portfolio"
-														value={portfolio}
-														onChange={handleChange}
-														onBlur={handleBlur}
-														type="url"
-														className="form-control"
-														placeholder="https://"
-														required
-													/>
-													{errors.portfolio &&
-														<p className="text-danger">{errors.portfolio}</p>
-													}
-													<br />
-													<label htmlFor="image">image</label>
-													<FormInput
-														name="image"
-														value={image}
-														onChange={handleChange}
-														onBlur={handleBlur}
-														type="file"
-														className="form-control"
-														placeholder="image"
-													/>
-													{errors.image && 
-														<p className="text-danger">{errors.image}</p>
-													}
-													<br />
-													<label htmlFor="job">Job Title</label>
-													<FormInput
-														name="job"
-														type="text"
-														value={job}
-														onChange={handleChange}
-														onBlur={handleBlur}
-														className="form-control"
-														placeholder="UI Designer"
-													/>
-													{errors.job && 
-														<p className="text-danger">{errors.job}</p>
-													}
-													<br />
-													<label htmlFor="email">Email</label>
-													<FormInput
-														name="email"
-														type="email"
-														value={email}
-														onChange={handleChange}
-														onBlur={handleBlur}
-														className="form-control"
-														placeholder="john@mail.com"
-													/>
-													{errors.email &&
-														<p className="text-danger">{errors.email}</p>
-													}
-													<br />
-													<CustomButton
-														type="submit"
-														className="btn custom-button"
-														disabled={isSubmitting}
-													>
-														Request Invite
-													</CustomButton>
-												</div>
-												<div className="col-md-6 p-0 order-2">
-													<div className="dropzone-area">
-														<Dropzone onDrop={withPreviews(handleDrop)}>
-															{({ getRootProps, getInputProps }) => (
-																<div {...getRootProps()}>
-																	<div className="outline">
-																		<div className="outline-content">
-																			<input {...getInputProps()} />
-																			<img src={cloud} alt="Cloud Icon" />
-																			<br />
-																			Drag and drop here <br />
-																			or
-																			<br /> <span>browse</span>
-																		</div>
-																	</div>
-																</div>
-															)}
-														</Dropzone>
-														<div className="image-preview">
-															{files.map(file => (
-																<img
-																	key={file.name}
-																	src={file.preview}
-																	alt=""
-																	className="dropped-image"
-																/>
-															))}
-														</div>
-													</div>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
+						{
+							modalContent(full_name, job_title, portfolio, email_address, avatar, handleSubmit, handleChange, handleBlur, errors, isSubmitting)
+						}
+						
 					</div>
 					<div className="col-md-6">
 						<Zoom>

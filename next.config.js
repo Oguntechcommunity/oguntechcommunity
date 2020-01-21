@@ -1,3 +1,4 @@
+require('dotenv').config()
 const withSass = require('@zeit/next-sass');
 const withImages = require('next-images');
 const withOffline = require('next-offline');
@@ -5,7 +6,7 @@ const withOffline = require('next-offline');
 // const nextConfig = {
 
 // }
-   
+ 
 module.exports = withImages();
 module.exports = withSass({
     webpack (config, options) {
@@ -20,5 +21,8 @@ module.exports = withSass({
         });
  
         return config;
+    },
+    env: {
+        REACT_APP_API_URL: process.env.REACT_APP_API_URL
     }
 })

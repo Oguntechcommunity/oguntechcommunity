@@ -4,22 +4,22 @@ import Zoom from "react-reveal/Zoom";
 import Mail from "../../../public/images/mail.png";
 import Globe from "../../../public/images/globe.png";
 
-const Portfolio = ({ name, title, image, websiteUrl, email }) => (
+const Portfolio = ({ full_name, job_title, avatar, portfolio, email_address }) => (
 	<div
 		className="portfolio"
 		style={{
-			backgroundImage: `url(${image})`
+			backgroundImage: `url(${avatar})`
 		}}
 	>
 		<Zoom>
 			<div className="overlay">
-				<h3 className="portfolio-name">{name}</h3>
-				<p className="portfolio-title">{title}</p>
+				<h3 className="portfolio-name">{full_name}</h3>
+				<p className="portfolio-title">{job_title}</p>
 				<div className="icons">
-					<a href={websiteUrl}>
+					<a href={portfolio}>
 						<img src={Globe} alt="Personal Website or Git" />
 					</a>
-					<a href={`mailto:${email}`}>
+					<a href={`mailto:${email_address}`}>
 						<img src={Mail} alt="email" />
 					</a>
 				</div>

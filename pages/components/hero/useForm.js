@@ -6,10 +6,10 @@ const useForm = (initialState, callback, validate) => {
 	const [isSubmitting, setSubmitting] = React.useState(false);
 
 	useEffect(() => {
-	if (isSubmitting) {
-		const noErrors = Object.keys(errors).length === 0;
+		if (isSubmitting) {
+			const noErrors = Object.keys(errors).length === 0;
 			if (noErrors) {
-				console.log("authenticated!", values.email, values.name);
+				console.log("authenticated!", values.email_address, values.full_name);
 				setSubmitting(false);
 				callback();
 			} else {
@@ -17,7 +17,6 @@ const useForm = (initialState, callback, validate) => {
 			}
 		}
 	}, [errors]);
-
 
 	const handleChange = event => {
 		event.preventDefault();
@@ -35,9 +34,8 @@ const useForm = (initialState, callback, validate) => {
 	const handleBlur = () => {
 		const validationErrors = validate(values);
 		setErrors(validationErrors);
-		setSubmitting(true);
-	}
 
+	};
 
 	return {
 		handleSubmit,

@@ -7,7 +7,6 @@ const INITIAL_STATE = {
 const regReducer = (state = INITIAL_STATE, action) => {
     switch (action.type){
         case RegActionTypes.USER_REGISTRATION:
-
         default:
             return state;
     }

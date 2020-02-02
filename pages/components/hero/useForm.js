@@ -34,7 +34,6 @@ const useForm = (initialState, callback, validate) => {
 	const handleBlur = () => {
 		const validationErrors = validate(values);
 		setErrors(validationErrors);
-
 	};
 
 	return {

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import axios from 'axios';
+import axios from "axios";
 
 import useForm from "./useForm";
 import validate from "./validate";
@@ -12,8 +12,7 @@ import CustomButton from "../custom-button/custom-button.component";
 
 import bgImage from "../../../public/images/bg-image.svg";
 
-
-import { registrationSuccess } from "../../../redux/registration/reg.actions";
+// import { registrationSuccess } from "../../../redux/registration/reg.actions";
 
 const INITIAL_STATE = {
 	full_name: "",
@@ -22,10 +21,6 @@ const INITIAL_STATE = {
 	email_address: "",
 	avatar: ""
 };
-
-
-
-
 
 const Hero = ({ registrationSuccess }) => {
 	const {
@@ -39,7 +34,6 @@ const Hero = ({ registrationSuccess }) => {
 
 	const { full_name, job_title, portfolio, email_address, avatar } = values;
 
-
 	function submit() {
 		const userObject = {
 			full_name,
@@ -47,40 +41,39 @@ const Hero = ({ registrationSuccess }) => {
 			portfolio,
 			email_address,
 			avatar
-		}
+		};
 		axios({
-			method:'POST',
+			method: "POST",
 			url: `${process.env.REACT_APP_API_URL}/user`,
 			headers: {
-				Authorization: 'Bearer 2d662d4d3b86df2697c87a5a88764627A+CvuYJLmEHSWmE1cG/q3p8b47zf/2jAD8udUUzpQy6ewahZEzE1b0ZQnw9q06is',
-				'Content-Type':'application/json'
+				Authorization:
+					"Bearer 2d662d4d3b86df2697c87a5a88764627A+CvuYJLmEHSWmE1cG/q3p8b47zf/2jAD8udUUzpQy6ewahZEzE1b0ZQnw9q06is",
+				"Content-Type": "application/json"
 			},
 			body: JSON.stringify(userObject)
-
 		})
-		.then((res) => {
-			console.log(res.data)
-			console.log(userObject)
-			registrationSuccess( {userObject})
-		})
-		.catch((err) => {
-			console.log()
-		})
-
-		
+			.then(res => {
+				console.log(res.data);
+				console.log(userObject);
+				registrationSuccess({ userObject });
+			})
+			.catch(err => {
+				console.log();
+			});
 	}
 
 	const modalContent = (
-		full_name, 
-		job_title, 
-		portfolio, 
-		email_address, 
-		avatar, 
+		full_name,
+		job_title,
+		portfolio,
+		email_address,
+		avatar,
 		handleSubmit,
 		handleChange,
 		handleBlur,
 		errors,
-		isSubmitting ) => (
+		isSubmitting
+	) => (
 		<div
 			className="modal fade"
 			id="exampleModal"
@@ -106,12 +99,12 @@ const Hero = ({ registrationSuccess }) => {
 					</div>
 					<div className="modal-body">
 						<p>
-							Feel free to join the community of tech professionals in
-							Ogun State today!
+							Feel free to join the community of tech professionals in Ogun
+							State today!
 						</p>
 						<p>
-							Please fill out all fields and upload your profile photo
-							so that we know you’ve got what it takes.
+							Please fill out all fields and upload your profile photo so that
+							we know you’ve got what it takes.
 						</p>
 						<form onSubmit={handleSubmit} noValidate>
 							<div className="content">
@@ -159,9 +152,8 @@ const Hero = ({ registrationSuccess }) => {
 									{errors.job_title && (
 										<p className="text-danger">{errors.job_title}</p>
 									)}
-									
-									<br />
 
+									<br />
 								</div>
 								<div className="col-md-6 pl-2 order-2">
 									<label htmlFor="image">image</label>
@@ -191,14 +183,13 @@ const Hero = ({ registrationSuccess }) => {
 									/>
 									{errors.email_address && (
 										<p className="text-danger">{errors.email_address}</p>
-									)}	
+									)}
 								</div>
-								
 							</div>
 							<CustomButton
-							type="submit"
-							className="btn custom-button"
-							disabled={isSubmitting}
+								type="submit"
+								className="btn custom-button"
+								disabled={isSubmitting}
 							>
 								Request Invite
 							</CustomButton>
@@ -207,7 +198,7 @@ const Hero = ({ registrationSuccess }) => {
 				</div>
 			</div>
 		</div>
-	)
+	);
 
 	return (
 		<section className="header">
@@ -234,10 +225,18 @@ const Hero = ({ registrationSuccess }) => {
 								</button>
 							</div>
 						</Zoom>
-						{
-							modalContent(full_name, job_title, portfolio, email_address, avatar, handleSubmit, handleChange, handleBlur, errors, isSubmitting)
-						}
-						
+						{modalContent(
+							full_name,
+							job_title,
+							portfolio,
+							email_address,
+							avatar,
+							handleSubmit,
+							handleChange,
+							handleBlur,
+							errors,
+							isSubmitting
+						)}
 					</div>
 					<div className="col-md-6">
 						<Zoom>

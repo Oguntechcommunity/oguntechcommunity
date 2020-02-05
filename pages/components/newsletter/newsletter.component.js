@@ -1,8 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import Zoom from "react-reveal/Zoom";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
+
+import { newsletterSub } from "../../../store/actions/newletterActions";
 
 import "./newsletter.styles.scss";
 
@@ -11,12 +14,28 @@ class Newsletter extends React.Component {
 		super(props);
 
 		this.state = {
-			email: " "
+			email: "",
+			error: ""
 		};
 	}
 
+	isValid = () => {
+		const { email } = this.state;
+		const regex = /\S+@\S+\.\S+/;
+		if (!regex.test(email)) {
+			this.setState({ error: "A Valid Email is required" });
+			return false;
+		}
+	};
+
 	handleSubmit = event => {
 		event.preventDefault();
+		const { email } = this.state;
+
+		if (this.isValid()) {
+			this.props.newsletterSub({ email });
+			this.setState({ email: "" });
+		}
 	};
 
 	handleChange = event => {
@@ -70,4 +89,4 @@ class Newsletter extends React.Component {
 	}
 }
 
-export default Newsletter;
+export default connect(null, { newsletterSub })(Newsletter);

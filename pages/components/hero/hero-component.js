@@ -12,7 +12,7 @@ import CustomButton from "../custom-button/custom-button.component";
 
 import bgImage from "../../../public/images/bg-image.svg";
 
-// import { registrationSuccess } from "../../../redux/registration/reg.actions";
+import { regMember } from "../../../store/actions/memberActions";
 
 const INITIAL_STATE = {
 	full_name: "",
@@ -22,7 +22,7 @@ const INITIAL_STATE = {
 	avatar: ""
 };
 
-const Hero = ({ registrationSuccess }) => {
+const Hero = ({ regMember }) => {
 	const {
 		handleSubmit,
 		handleChange,
@@ -35,31 +35,7 @@ const Hero = ({ registrationSuccess }) => {
 	const { full_name, job_title, portfolio, email_address, avatar } = values;
 
 	function submit() {
-		const userObject = {
-			full_name,
-			job_title,
-			portfolio,
-			email_address,
-			avatar
-		};
-		axios({
-			method: "POST",
-			url: `${process.env.REACT_APP_API_URL}/user`,
-			headers: {
-				Authorization:
-					"Bearer 2d662d4d3b86df2697c87a5a88764627A+CvuYJLmEHSWmE1cG/q3p8b47zf/2jAD8udUUzpQy6ewahZEzE1b0ZQnw9q06is",
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(userObject)
-		})
-			.then(res => {
-				console.log(res.data);
-				console.log(userObject);
-				registrationSuccess({ userObject });
-			})
-			.catch(err => {
-				console.log();
-			});
+		regMember({ full_name, job_title, portfolio, email_address, avatar });
 	}
 
 	const modalContent = (
@@ -258,9 +234,4 @@ const Hero = ({ registrationSuccess }) => {
 	);
 };
 
-const mapDispatchToProps = dispatch => ({
-	registrationSuccess: regCredentials =>
-		dispatch(registrationSuccess(regCredentials))
-});
-
-export default connect(null, mapDispatchToProps)(Hero);
+export default connect(null, { regMember })(Hero);

@@ -11,7 +11,8 @@ const useForm = (initialState, callback, validate) => {
 			if (noErrors) {
 				console.log("authenticated!", values.email_address, values.full_name);
 				setSubmitting(false);
-				callback();
+				callback(setSubmitting);
+				values({ ...INITIAL_STATE });
 			} else {
 				setSubmitting(false);
 			}
@@ -28,7 +29,6 @@ const useForm = (initialState, callback, validate) => {
 		event.preventDefault();
 		const validationErrors = validate(values);
 		setErrors(validationErrors);
-		setSubmitting(true);
 	};
 
 	const handleBlur = () => {
@@ -42,7 +42,8 @@ const useForm = (initialState, callback, validate) => {
 		handleBlur,
 		values,
 		errors,
-		isSubmitting
+		isSubmitting,
+		setSubmitting
 	};
 };
 

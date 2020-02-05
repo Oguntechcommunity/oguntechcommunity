@@ -17,6 +17,8 @@ const Portfolio = ({
 		<div
 			className="portfolio"
 			style={{
+				objectFit: "cover",
+				backgroundSize: "contain",
 				backgroundImage: `url(${Avatar})`
 			}}
 		>

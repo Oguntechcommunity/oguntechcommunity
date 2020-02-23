@@ -1,237 +1,239 @@
-import React from "react";
-import { connect } from "react-redux";
-import axios from "axios";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import useForm from "./useForm";
-import validate from "./validate";
+import useForm from './useForm';
+import validate from './validate';
 
-import Zoom from "react-reveal/Zoom";
+import Zoom from 'react-reveal/Zoom';
 
-import FormInput from "../form-input/form-input.component";
-import CustomButton from "../custom-button/custom-button.component";
+import FormInput from '../form-input/form-input.component';
+import CustomButton from '../custom-button/custom-button.component';
 
-import bgImage from "../../../public/images/bg-image.svg";
+import Alert from '../errors/alert.component';
 
-import { regMember } from "../../../store/actions/memberActions";
+import bgImage from '../../../public/images/bg-image.svg';
+
+import { regMember } from '../../../store/actions/memberActions';
 
 const INITIAL_STATE = {
-	full_name: "",
-	job_title: "",
-	portfolio: "",
-	email_address: "",
-	avatar: ""
+  full_name: '',
+  job_title: '',
+  portfolio: '',
+  email_address: '',
+  avatar: ''
 };
 
-const Hero = ({ regMember }) => {
-	const {
-		handleSubmit,
-		handleChange,
-		handleBlur,
-		values,
-		errors,
-		isSubmitting
-	} = useForm(INITIAL_STATE, submit, validate);
+const Hero = ({ regMember, setAlert }) => {
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    errors,
+    isSubmitting
+  } = useForm(INITIAL_STATE, submit, validate);
 
-	const { full_name, job_title, portfolio, email_address, avatar } = values;
+  const { full_name, job_title, portfolio, email_address, avatar } = values;
 
-	function submit() {
-		regMember({ full_name, job_title, portfolio, email_address, avatar });
-	}
+  function submit() {
+    regMember({ full_name, job_title, portfolio, email_address, avatar });
+  }
 
-	const modalContent = (
-		full_name,
-		job_title,
-		portfolio,
-		email_address,
-		avatar,
-		handleSubmit,
-		handleChange,
-		handleBlur,
-		errors,
-		isSubmitting
-	) => (
-		<div
-			className="modal fade"
-			id="exampleModal"
-			tabIndex="-1"
-			role="dialog"
-			aria-labelledby="exampleModalLabel"
-			aria-hidden="true"
-		>
-			<div className="modal-dialog" role="document">
-				<div className="modal-content">
-					<div className="modal-header">
-						<h5 className="modal-title" id="exampleModalLabel">
-							Request an invite
-						</h5>
-						<button
-							type="button"
-							className="close"
-							data-dismiss="modal"
-							aria-label="Close"
-						>
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div className="modal-body">
-						<p>
-							Feel free to join the community of tech professionals in Ogun
-							State today!
-						</p>
-						<p>
-							Please fill out all fields and upload your profile photo so that
-							we know you’ve got what it takes.
-						</p>
-						<form onSubmit={handleSubmit} noValidate>
-							<div className="content">
-								<div className="col-md-6 pl-2 order-1">
-									<label htmlFor="name">Name</label>
-									<FormInput
-										name="full_name"
-										value={full_name}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										type="text"
-										className="form-control"
-										placeholder="John Doe"
-									/>
-									{errors.full_name && (
-										<p className="text-danger">{errors.full_name}</p>
-									)}
-									<br />
-									<label htmlFor="portfolio">Portfolio</label>
-									<FormInput
-										name="portfolio"
-										value={portfolio}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										type="url"
-										className="form-control"
-										placeholder="https://"
-										required
-									/>
-									{errors.portfolio && (
-										<p className="text-danger">{errors.portfolio}</p>
-									)}
-									<br />
+  const modalContent = (
+    full_name,
+    job_title,
+    portfolio,
+    email_address,
+    avatar,
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    errors,
+    isSubmitting
+  ) => (
+    <div
+      className='modal fade'
+      id='exampleModal'
+      tabIndex='-1'
+      role='dialog'
+      aria-labelledby='exampleModalLabel'
+      aria-hidden='true'
+    >
+      <div className='modal-dialog' role='document'>
+        <div className='modal-content'>
+          <div className='modal-header'>
+            <h5 className='modal-title' id='exampleModalLabel'>
+              Request an invite
+            </h5>
+            <button
+              type='button'
+              className='close'
+              data-dismiss='modal'
+              aria-label='Close'
+            >
+              <span aria-hidden='true'>&times;</span>
+            </button>
+          </div>
+          <div className='modal-body'>
+            <p>
+              Feel free to join the community of tech professionals in Ogun
+              State today!
+            </p>
+            <p>
+              Please fill out all fields and upload your profile photo so that
+              we know you’ve got what it takes.
+            </p>
+            <Alert />
+            <form onSubmit={handleSubmit} noValidate>
+              <div className='content'>
+                <div className='col-md-6 pl-2 order-1'>
+                  <label htmlFor='name'>Name</label>
+                  <FormInput
+                    name='full_name'
+                    value={full_name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    type='text'
+                    className='form-control'
+                    placeholder='John Doe'
+                  />
+                  {errors.full_name && (
+                    <p className='text-danger'>{errors.full_name}</p>
+                  )}
+                  <br />
+                  <label htmlFor='portfolio'>Portfolio</label>
+                  <FormInput
+                    name='portfolio'
+                    value={portfolio}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    type='url'
+                    className='form-control'
+                    placeholder='https://'
+                    required
+                  />
+                  {errors.portfolio && (
+                    <p className='text-danger'>{errors.portfolio}</p>
+                  )}
+                  <br />
 
-									<label htmlFor="job">Job Title</label>
-									<FormInput
-										name="job_title"
-										type="text"
-										value={job_title}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										className="form-control"
-										placeholder="UI Designer"
-									/>
-									{errors.job_title && (
-										<p className="text-danger">{errors.job_title}</p>
-									)}
+                  <label htmlFor='job'>Job Title</label>
+                  <FormInput
+                    name='job_title'
+                    type='text'
+                    value={job_title}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className='form-control'
+                    placeholder='UI Designer'
+                  />
+                  {errors.job_title && (
+                    <p className='text-danger'>{errors.job_title}</p>
+                  )}
 
-									<br />
-								</div>
-								<div className="col-md-6 pl-2 order-2">
-									<label htmlFor="image">image</label>
-									<FormInput
-										name="avatar"
-										value={avatar}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										type="file"
-										className="form-control"
-										placeholder="image"
-									/>
-									{errors.avatar && (
-										<p className="text-danger">{errors.avatar}</p>
-									)}
+                  <br />
+                </div>
+                <div className='col-md-6 pl-2 order-2'>
+                  <label htmlFor='image'>image</label>
+                  <FormInput
+                    name='avatar'
+                    value={avatar}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    type='file'
+                    className='form-control'
+                    placeholder='image'
+                  />
+                  {errors.avatar && (
+                    <p className='text-danger'>{errors.avatar}</p>
+                  )}
 
-									<br />
-									<label htmlFor="email">Email</label>
-									<FormInput
-										name="email_address"
-										type="email"
-										value={email_address}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										className="form-control"
-										placeholder="john@mail.com"
-									/>
-									{errors.email_address && (
-										<p className="text-danger">{errors.email_address}</p>
-									)}
-								</div>
-							</div>
-							<CustomButton
-								type="submit"
-								className="btn custom-button"
-								disabled={isSubmitting}
-							>
-								Request Invite
-							</CustomButton>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+                  <br />
+                  <label htmlFor='email'>Email</label>
+                  <FormInput
+                    name='email_address'
+                    type='email'
+                    value={email_address}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className='form-control'
+                    placeholder='john@mail.com'
+                  />
+                  {errors.email_address && (
+                    <p className='text-danger'>{errors.email_address}</p>
+                  )}
+                </div>
+              </div>
+              <CustomButton
+                type='submit'
+                className='btn custom-button'
+                disabled={isSubmitting}
+              >
+                Request Invite
+              </CustomButton>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
-	return (
-		<section className="header">
-			<div className="container">
-				<div className="row">
-					<div className="col-md-6">
-						<Zoom>
-							<div className="rc">
-								<h2 className="rc-heading">
-									Connecting the tech professionals in Ogun state
-								</h2>
-								<p className="rc-paragraph">
-									Ogun Tech Community is a circle of technology enthusiasts
-									passionate about solving problems in their immediate
-									workplace.
-								</p>
-								<button
-									type="button"
-									className="rc-button btn"
-									data-toggle="modal"
-									data-target="#exampleModal"
-								>
-									Request Invite
-								</button>
-							</div>
-						</Zoom>
-						{modalContent(
-							full_name,
-							job_title,
-							portfolio,
-							email_address,
-							avatar,
-							handleSubmit,
-							handleChange,
-							handleBlur,
-							errors,
-							isSubmitting
-						)}
-					</div>
-					<div className="col-md-6">
-						<Zoom>
-							<div className="lc">
-								<img src={bgImage} className="lc-bg-image" alt="image" />
-								<div className="lc-image-container">
-									<img
-										src="https://res.cloudinary.com/trapintrovert/image/upload/v1576764038/community.jpg"
-										alt="community illustration"
-										className="community-illustration"
-									/>
-								</div>
-							</div>
-						</Zoom>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+  return (
+    <section className='header'>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-6'>
+            <Zoom>
+              <div className='rc'>
+                <h2 className='rc-heading'>
+                  Connecting the tech professionals in Ogun state
+                </h2>
+                <p className='rc-paragraph'>
+                  Ogun Tech Community is a circle of technology enthusiasts
+                  passionate about solving problems in their immediate
+                  workplace.
+                </p>
+                <button
+                  type='button'
+                  className='rc-button btn'
+                  data-toggle='modal'
+                  data-target='#exampleModal'
+                >
+                  Request Invite
+                </button>
+              </div>
+            </Zoom>
+            {modalContent(
+              full_name,
+              job_title,
+              portfolio,
+              email_address,
+              avatar,
+              handleSubmit,
+              handleChange,
+              handleBlur,
+              errors,
+              isSubmitting
+            )}
+          </div>
+          <div className='col-md-6'>
+            <Zoom>
+              <div className='lc'>
+                <img src={bgImage} className='lc-bg-image' alt='image' />
+                <div className='lc-image-container'>
+                  <img
+                    src='https://res.cloudinary.com/trapintrovert/image/upload/v1576764038/community.jpg'
+                    alt='community illustration'
+                    className='community-illustration'
+                  />
+                </div>
+              </div>
+            </Zoom>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default connect(null, { regMember })(Hero);

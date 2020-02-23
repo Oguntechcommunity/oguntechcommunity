@@ -25,19 +25,9 @@ export const regMember = ({
     email_address,
     avatar
   });
-  try {
-    const res = await http.post('/user', body, config);
-    dispatch({ type: actions.REG_MEMBER, reg_member: res.data });
-    console.log(res.data);
-  } catch (err) {
-    const error = err.response.data.message;
-    console.log(error);
 
-    dispatch({
-      type: actions.REG_FAILURE,
-      error
-    });
-  }
+  const res = await http.post('/user', body, config);
+  dispatch({ type: actions.REG_MEMBER, reg_member: res.data });
 };
 
 export const onMemberSearch = text => async dispatch => {

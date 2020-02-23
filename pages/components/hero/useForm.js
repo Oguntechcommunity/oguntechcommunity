@@ -1,50 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 const useForm = (initialState, callback, validate) => {
-	const [values, setValues] = useState(initialState);
-	const [errors, setErrors] = useState({});
-	const [isSubmitting, setSubmitting] = React.useState(false);
+  const [values, setValues] = useState(initialState);
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setSubmitting] = React.useState(false);
 
-	useEffect(() => {
-		if (isSubmitting) {
-			const noErrors = Object.keys(errors).length === 0;
-			if (noErrors) {
-				console.log("authenticated!", values.email_address, values.full_name);
-				setSubmitting(false);
-				callback(setSubmitting);
-				values({ ...INITIAL_STATE });
-			} else {
-				setSubmitting(false);
-			}
-		}
-	}, [errors]);
+  useEffect(() => {
+    if (isSubmitting) {
+      const noErrors = Object.keys(errors).length === 0;
+      if (noErrors) {
+        console.log('authenticated!', values.email_address, values.full_name);
+        setSubmitting(false);
+        callback(setSubmitting);
+        values({ ...INITIAL_STATE });
+      } else {
+        setSubmitting(false);
+      }
+    }
+  }, [errors]);
 
-	const handleChange = event => {
-		event.preventDefault();
-		const { name, value } = event.target;
-		setValues({ ...values, [name]: value });
-	};
+  const handleChange = event => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
+  };
 
-	const handleSubmit = event => {
-		event.preventDefault();
-		const validationErrors = validate(values);
-		setErrors(validationErrors);
-	};
+  const handleSubmit = event => {
+    event.preventDefault();
+    const validationErrors = validate(values);
+    setErrors(validationErrors);
+    callback();
+  };
 
-	const handleBlur = () => {
-		const validationErrors = validate(values);
-		setErrors(validationErrors);
-	};
+  const handleBlur = () => {
+    const validationErrors = validate(values);
+    setErrors(validationErrors);
+  };
 
-	return {
-		handleSubmit,
-		handleChange,
-		handleBlur,
-		values,
-		errors,
-		isSubmitting,
-		setSubmitting
-	};
+  return {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    errors,
+    isSubmitting,
+    setSubmitting
+  };
 };
 
 export default useForm;
